@@ -21,7 +21,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	controllers.Path(r)
+	controllers.Routers(r)
 
 	r.Run()
 }

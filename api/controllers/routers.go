@@ -14,22 +14,9 @@
 
 package controllers
 
-import (
-	"net/http"
+import "github.com/gin-gonic/gin"
 
-	"github.com/gin-gonic/gin"
-)
-
-// Path Parameters in path
-func Path(ctx *gin.Context) {
-
-	name := ctx.Param("name")
-	action := ctx.Param("action")
-	if action != "" {
-		message := name + " is " + action
-		ctx.String(http.StatusOK, message)
-		return
-	}
-	ctx.String(http.StatusOK, "Hello %s", name)
-
+func Routers(router *gin.Engine) {
+	router.GET("/user/:name", Path)
+	router.GET("/user/:name/*action", Path)
 }

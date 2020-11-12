@@ -15,23 +15,28 @@
 package controllers
 
 import (
+	"net/http"
+
+	"github.com/elton/gin-playground/api/models"
 	"github.com/gin-gonic/gin"
 )
 
-// Routers all routers for the application.
-func Routers(router *gin.Engine) {
-	v1 := router.Group("/api/v1")
-	{
-		// v1.GET("/user/:name", Path)
-		// v1.GET("/user/:name/*action", Path)
-		// curl -i http://localhost:8080/api/v1/welcome\?firstname=Jane\&lastname=Doe
-		v1.GET("/welcome", QueryString)
-		// curl -v -X POST \
-		//   http://localhost:8080/api/v1/login \
-		//   -H 'content-type: application/json' \
-		//   -d '{ "user": "manu","password":"123" }'
-		v1.POST("/login", Login)
-		v1.GET("/user/:pname/:id", URIBind)
+// Login user log in and binding to the user struct.
+func Login(ctx *gin.Context) {
+	user := models.User{}
+	if err := ctx.ShouldBindJSON(&user); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
+	ctx.JSON(http.StatusOK, gin.H{"status": "you are logged in."})
+}
 
+// URIBind binding uri to model.
+func URIBind(ctx *gin.Context) {
+	person := models.Person{}
+	if err := ctx.ShouldBindUri(&person); err != nil {
+		ctx.JSON(400, gin.H{"msg": err})
+		return
+	}
+	ctx.JSON(200, gin.H{"name": person.Name, "uuid": person.ID})
 }

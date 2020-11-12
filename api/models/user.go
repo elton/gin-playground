@@ -12,26 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package controllers
+package models
 
-import (
-	"github.com/gin-gonic/gin"
-)
-
-// Routers all routers for the application.
-func Routers(router *gin.Engine) {
-	v1 := router.Group("/api/v1")
-	{
-		// v1.GET("/user/:name", Path)
-		// v1.GET("/user/:name/*action", Path)
-		// curl -i http://localhost:8080/api/v1/welcome\?firstname=Jane\&lastname=Doe
-		v1.GET("/welcome", QueryString)
-		// curl -v -X POST \
-		//   http://localhost:8080/api/v1/login \
-		//   -H 'content-type: application/json' \
-		//   -d '{ "user": "manu","password":"123" }'
-		v1.POST("/login", Login)
-		v1.GET("/user/:pname/:id", URIBind)
-	}
-
+type User struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }

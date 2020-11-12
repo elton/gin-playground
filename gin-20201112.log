@@ -1,0 +1,12 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/v1/user/:name        --> github.com/elton/gin-playground/api/controllers.Path (3 handlers)
+[GIN-debug] GET    /api/v1/user/:name/*action --> github.com/elton/gin-playground/api/controllers.Path (3 handlers)
+[GIN-debug] GET    /api/v1/welcome           --> github.com/elton/gin-playground/api/controllers.QueryString (3 handlers)
+[GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2020/11/12 - 11:00:18 |[97;42m 200 [0m|      28.292µs |             ::1 |[97;44m GET     [0m "/api/v1/welcome?firstname=Jane&lastname=Doe"

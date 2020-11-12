@@ -20,8 +20,12 @@ import (
 
 // Routers all routers for the application.
 func Routers(router *gin.Engine) {
-	router.GET("/user/:name", Path)
-	router.GET("/user/:name/*action", Path)
-	// curl -i http://localhost:8080/welcome\?firstname=Jane\&lastname=Doe
-	router.GET("/welcome", QueryString)
+	v1 := router.Group("/api/v1")
+	{
+		v1.GET("/user/:name", Path)
+		v1.GET("/user/:name/*action", Path)
+		// curl -i http://localhost:8080/api/v1/welcome\?firstname=Jane\&lastname=Doe
+		v1.GET("/welcome", QueryString)
+	}
+
 }

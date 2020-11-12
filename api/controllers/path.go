@@ -33,3 +33,11 @@ func Path(ctx *gin.Context) {
 	ctx.String(http.StatusOK, "Hello %s", name)
 
 }
+
+// QueryString query string parameters
+func QueryString(ctx *gin.Context) {
+	firstname := ctx.DefaultQuery("firstname", "Guest")
+	lastname := ctx.Query("lastname")
+
+	ctx.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+}

@@ -14,9 +14,14 @@
 
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
+// Routers all routers for the application.
 func Routers(router *gin.Engine) {
 	router.GET("/user/:name", Path)
 	router.GET("/user/:name/*action", Path)
+	// curl -i http://localhost:8080/welcome\?firstname=Jane\&lastname=Doe
+	router.GET("/welcome", QueryString)
 }

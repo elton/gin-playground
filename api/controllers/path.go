@@ -12,16 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package controllers
 
 import (
-	"github.com/elton/gin-playground/api/controllers"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
-	r := gin.Default()
-	controllers.Path(r)
+// Path Parameters in path
+func Path(router *gin.Engine) {
 
-	r.Run()
+	router.GET("/user/:name", func(ctx *gin.Context) {
+		name := ctx.Param("name")
+		ctx.String(http.StatusOK, "Hello %s", name)
+	})
+
+	router.GET("/user/:name/*action", func(ctx *gin.Context) {
+		name := ctx.Param("name")
+		action := ctx.Param("action")
+		message := name + " is " + action
+		ctx.String(http.StatusOK, message)
+		ctx.String(http.StatusOK, ctx.FullPath())
+	})
 }
